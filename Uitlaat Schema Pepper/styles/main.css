@@ -1,0 +1,54 @@
+#opslaan,
+.tab,
+body {
+  font-family: "Trebuchet MS";
+}
+#opslaan {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #82eff3;
+  border: none;
+}
+.tab {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #82eff3;
+  border: none;
+  border-bottom: 2px solid transparent;
+}
+.tab-content {
+  border: 1px solid #b37a3e;
+  background-color: #ebce68;
+}
+.tab.active {
+  border-bottom: 2px solid #017bff;
+}
+.tab-content {
+  display: none;
+  padding: 20px;
+  width: 750px;
+}
+.tab-content.active {
+  display: block;
+}
+#is-saved {
+  padding: 10px;
+  width: 190px;
+  opacity: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #b37a3e;
+  background-color: #ebce68;
+}
+#verboden {
+  width: 387px;
+  position: absolute;
+  padding: 10px;
+  left: 210px;
+}
+
+#titel {
+  width: 812px;
+}

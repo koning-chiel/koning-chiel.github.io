@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "None",
+    "noImplicitAny": true,
+    "outFile": "./build/build.js",
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "rootDir": "src",
+    "sourceMap": true,
+    "target": "es5",
+    "esModuleInterop": true,
+    "types": ["p5"],
+    "incremental": true,
+    "strict": true,
+    "lib": ["es2015", "DOM"]
+  }
+}

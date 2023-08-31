@@ -1,0 +1,33 @@
+Copyright ©2022 Meteor Dodge. Alle rechten voorbehouden.
+
+Meteor Dodge is een uniek en uitdagend computerspel.
+Het spel is beschermd door auteursrechten en mag niet worden gekopieerd,
+gewijzigd of gedistribueerd zonder uitdrukkelijke toestemming van de ontwikkelaar.
+
+Het spel Meteor Dodge is een intellectueel eigendom van de ontwikkelaar en
+mag niet worden gebruikt voor commerciële doeleinden zonder toestemming.
+Dit geldt ook voor de muziek, geluiden en beelden die in het spel zijn opgenomen.
+
+Het is niet toegestaan om Meteor Dodge te verkopen, verhuren, verdelen of
+op enige andere manier te exploiteren voor commerciële doeleinden zonder uitdrukkelijke toestemming van de ontwikkelaar.
+Dit geldt ook voor het aanbieden van het spel via peer-to-peer netwerken of andere digitale distributiekanalen.
+
+Het is de gebruiker niet toegestaan om de software van Meteor Dodge te decompileren,
+te reverse-engineeren of op enige andere manier te proberen de broncode te achterhalen.
+Dit geldt ook voor het maken van aanpassingen aan het spel of het toevoegen van extra inhoud.
+
+Meteor Dodge mag alleen worden gebruikt voor persoonlijk gebruik. Het is niet toegestaan om
+het spel te gebruiken voor commerciële doeleinden of om het spel te gebruiken in een openbare setting.
+
+De ontwikkelaar behoudt zich het recht voor om deze gebruiksvoorwaarden te wijzigen zonder kennisgeving.
+Het is de verantwoordelijkheid van de gebruiker om deze gebruiksvoorwaarden te bekijken en te volgen.
+
+De ontwikkelaar aanvaardt geen aansprakelijkheid voor enige schade die ontstaat als gevolg van het gebruik van Meteor Dodge,
+inclusief maar niet beperkt tot directe, indirecte, incidentele of gevolgschade.
+
+Door het gebruik van Meteor Dodge gaat de gebruiker akkoord met deze gebruiksvoorwaarden en
+erkent de gebruiker dat hij of zij verantwoordelijk is voor het naleven van deze gebruiksvoorwaarden.
+
+Het is toegestaan om Meteor Dodge te modificeren voor persoonlijk gebruik, zoals het aanpassen van de graphics of
+het toevoegen van eigen inhoud. Echter, de gebruiker doet dit op eigen risico en
+de ontwikkelaar aanvaardt geen aansprakelijkheid voor enige problemen of schade die ontstaan als gevolg van deze modificaties.

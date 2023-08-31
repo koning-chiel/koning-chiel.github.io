@@ -1,0 +1,24 @@
+- Assets -
+
+- Geluid -
+
+--------------------------------------------------------------------------------------------------------------
+Achtergrond muziek: Pavel Lipski
+Soundtrack van Potion Craft
+"https://www.potioncraft.com/",
+"https://store.steampowered.com/app/1210320/Potion_Craft_Alchemist_Simulator/"
+--------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------
+Coin geluid: @soundeffect2372
+Created using SFXR.
+"https://youtu.be/M5d25mtIICM"
+--------------------------------------------------------------------------------------------------------------
+
+- Afbeeldingen - 
+
+--------------------------------------------------------------------------------------------------------------
+Achtergrond-Afbeelding: Png Tree
+License: "https://pngtree.com/legal/license-terms"
+"https://pngtree.com/freebackground/blue-sky-and-white-clouds-cartoon-sky-background_1280041.html"
+--------------------------------------------------------------------------------------------------------------
