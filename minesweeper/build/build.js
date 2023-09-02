@@ -34,45 +34,52 @@ function isTileNumber(x, y) {
     if (isTileBomb(x - 1, y)) {
         num++;
     }
+    if (isTileBomb(x, y)) {
+        num = 9;
+    }
     return num;
 }
 function isTileNextToZero(x, y) {
     var num = 0;
-    if (isTileEmpty(x - 1, y - 1)) {
+    if (isTileZero(x - 1, y - 1)) {
         num++;
     }
-    if (isTileEmpty(x, y - 1)) {
+    if (isTileZero(x, y - 1)) {
         num++;
     }
-    if (isTileEmpty(x + 1, y - 1)) {
+    if (isTileZero(x + 1, y - 1)) {
         num++;
     }
-    if (isTileEmpty(x + 1, y)) {
+    if (isTileZero(x + 1, y)) {
         num++;
     }
-    if (isTileEmpty(x + 1, y + 1)) {
+    if (isTileZero(x + 1, y + 1)) {
         num++;
     }
-    if (isTileEmpty(x, y + 1)) {
+    if (isTileZero(x, y + 1)) {
         num++;
     }
-    if (isTileEmpty(x - 1, y + 1)) {
+    if (isTileZero(x - 1, y + 1)) {
         num++;
     }
-    if (isTileEmpty(x - 1, y)) {
+    if (isTileZero(x - 1, y)) {
         num++;
     }
     return num;
 }
-function isTileEmpty(x, y) {
-    return zeroTiles.indexOf("".concat(x, ",").concat(y)) !== -1;
+function isTileZero(x, y) {
+    var valid = tiles.find(function (tile) { return tile.gridX === x && tile.gridY === y; });
+    var bool = isTileNumber(x, y) === 0;
+    if (!valid)
+        bool = false;
+    return bool;
 }
-function generateRandomBombs(debug) {
+function generateRandomBombs(debug, firstClickX, firstClickY) {
     bombTiles = [];
     var arrayLength = 256;
     var bombs = 40;
     var array = new Array(arrayLength).fill(0);
-    for (var i = 0; i < (bombs + 1); i++) {
+    for (var i = 0; i < bombs + 1; i++) {
         var randomIndex = void 0;
         do {
             randomIndex = Math.floor(Math.random() * arrayLength);
@@ -107,6 +114,7 @@ var filledTiles = [];
 var clickedTiles = [];
 var alive = true;
 var flaggedTiles = [];
+var firstClick = true;
 var currentTimer = "000";
 var currentBombsLeft = "040";
 var currentBombsNumLeft = 40;
@@ -195,7 +203,7 @@ function preload() {
         "8": png_timer_8,
         "9": png_timer_9,
         "-": png_timer_minus,
-        " ": png_timer_empty,
+        " ": png_timer_empty
     };
     png_tile = {
         "1": png_tile_1,
@@ -206,34 +214,31 @@ function preload() {
         "6": png_tile_6,
         "7": png_tile_7,
         "8": png_tile_8,
-        "bomb": png_tile_bomb,
-        "bomb_pressed": png_tile_bomb_pressed,
-        "bomb_pressed_red": png_tile_bomb_pressed_red,
-        "no_bomb": png_tile_no_bomb,
-        "pressed": png_tile_pressed,
-        "unknown": png_tile_unknown,
-        "unknown_pressed": png_tile_pressed,
-        "empty": png_tile_empty,
-        "flag": png_tile_flag
+        bomb: png_tile_bomb,
+        bomb_pressed: png_tile_bomb_pressed,
+        bomb_pressed_red: png_tile_bomb_pressed_red,
+        no_bomb: png_tile_no_bomb,
+        pressed: png_tile_pressed,
+        unknown: png_tile_unknown,
+        unknown_pressed: png_tile_pressed,
+        empty: png_tile_empty,
+        flag: png_tile_flag
     };
 }
 function setup() {
-    var debug = false;
     document.addEventListener("contextmenu", function (event) {
         event.preventDefault();
     });
     createCanvas(280, 321);
     background(png_outline);
-    generateRandomBombs(debug);
+    generateRandomBombs(false);
     var x = 1;
     var y = 1;
     for (var i = 0; i < 256; i++) {
         var pixelName = filledTiles.length + 1;
-        if (bombTiles.indexOf("".concat(x, ",").concat(y)) == -1 || debug === false) {
-            var tile = createClickableTile(toPixelRange(x, "x"), toPixelRange(y, "y"), x, y, png_tile_empty, png_tile_pressed, pixelName.toString());
-            filledTiles.push("".concat(x, ",").concat(y));
-            tiles.push(tile);
-        }
+        var tile = createClickableTile(toPixelRange(x, "x"), toPixelRange(y, "y"), x, y, png_tile_empty, png_tile_pressed, pixelName.toString());
+        filledTiles.push("".concat(x, ",").concat(y));
+        tiles.push(tile);
         x++;
         if (x > 16) {
             x = 1;
@@ -245,7 +250,18 @@ function setup() {
 var frame = 0;
 var seconds = 0;
 function draw() {
+    if (mouseX >= 128 && mouseY >= 15 && mouseX <= 128 + 24 && mouseY <= 15 + 24) {
+        if (mouseIsPressed) {
+            location.reload();
+        }
+    }
     if (alive) {
+        if (tiles.length === 40) {
+            image(png_smiley_cool, 128, 15);
+        }
+        else {
+            image(png_smiley_happy, 128, 15);
+        }
         frame++;
         if (frame > frameRate()) {
             seconds++;
@@ -270,7 +286,7 @@ function draw() {
             currentBombsLeft = "-".concat(currentBombsNumLeft / -1);
         }
         else if (currentBombsNumLeft < 0) {
-            currentBombsLeft = "-0".concat(currentBombsNumLeft / -1);
+            currentBombsLeft = "-0".concat((currentBombsNumLeft / -1));
         }
         else if (currentBombsNumLeft < 10) {
             currentBombsLeft = "00".concat(currentBombsNumLeft);
@@ -295,6 +311,7 @@ function draw() {
         }
     }
     else {
+        image(png_smiley_dead, 128, 15);
         once(showAll());
     }
 }
@@ -370,10 +387,7 @@ function createClickableTile(x, y, gridX, gridY, img, onHoverImage, name) {
             }
         },
         checkHover: function () {
-            if (mouseX > this.x &&
-                mouseX < this.x + 16 &&
-                mouseY > this.y &&
-                mouseY < this.y + 16) {
+            if (mouseX > this.x && mouseX < this.x + 16 && mouseY > this.y && mouseY < this.y + 16) {
                 this.rollover = true;
             }
             else {
@@ -404,69 +418,6 @@ function createClickableTile(x, y, gridX, gridY, img, onHoverImage, name) {
         }
     };
     return tile;
-}
-function click(gridX, gridY, immortal, forceImg) {
-    if (immortal == undefined)
-        immortal = false;
-    var valid = tiles.find(function (tile) { return tile.gridX === gridX && tile.gridY === gridY; });
-    if (valid) {
-        var index = tiles.indexOf(valid);
-        if (forceImg == undefined) {
-            changePixel(gridX, gridY, tileFromMap(gridX, gridY), false);
-        }
-        else {
-            changePixel(gridX, gridY, forceImg, false);
-        }
-        flaggedTiles.splice(index, 1);
-        tiles.splice(index, 1);
-        clickedTiles.push("".concat(gridX, ",").concat(gridY));
-        if (!immortal && tileFromMap(gridX, gridY) === "bomb")
-            alive = false;
-    }
-    else {
-        console.warn("The function click() crashed: ".concat(gridX, ", ").concat(gridY, " is not a valid tile."));
-    }
-}
-function flag(gridX, gridY) {
-    var valid = tiles.find(function (tile) { return tile.gridX === gridX && tile.gridY === gridY; });
-    if (valid) {
-        var index = tiles.indexOf(valid);
-        tiles[index].image = png_tile_flag;
-        tiles[index].isFlagged = true;
-        tiles[index].hoverImage = png_tile_flag;
-        flaggedTiles.push("".concat(gridX, ",").concat(gridY));
-        currentBombsNumLeft--;
-    }
-    else {
-        console.warn("The function flag() crashed: ".concat(gridX, ", ").concat(gridY, " is not a valid tile."));
-    }
-}
-function unFlag(gridX, gridY) {
-    var valid = tiles.find(function (tile) { return tile.gridX === gridX && tile.gridY === gridY; });
-    if (valid) {
-        var index = tiles.indexOf(valid);
-        tiles[index].image = png_tile_empty;
-        tiles[index].isFlagged = false;
-        tiles[index].hoverImage = png_tile_pressed;
-        flaggedTiles.splice(index, 1);
-        flaggedTiles.push("".concat(gridX, ",").concat(gridY));
-        currentBombsNumLeft++;
-    }
-    else {
-        console.warn("The function unFlag() crashed: ".concat(gridX, ", ").concat(gridY, " is not a valid tile."));
-    }
-}
-function once(code, returnPar) {
-    if (onceArr.indexOf(code.toString()) !== -1) {
-        code;
-        onceArr.push(code.toString());
-        if (returnPar = true)
-            return true;
-    }
-    else {
-        if (returnPar = true)
-            return false;
-    }
 }
 function tileFromMap(gridX, gridY) {
     var x = gridX;
@@ -516,5 +467,86 @@ function showAll() {
     }
     console.log = important;
     console.warn = important2;
+}
+function click(gridX, gridY, immortal, forceImg) {
+    var loadZeros = false;
+    immortal = immortal || false;
+    var valid = tiles.find(function (tile) { return tile.gridX === gridX && tile.gridY === gridY; });
+    if (valid) {
+        var index = tiles.indexOf(valid);
+        if (forceImg == undefined) {
+            if (isTileZero(gridX, gridY))
+                loadZeros = true;
+            changePixel(gridX, gridY, tileFromMap(gridX, gridY), false);
+        }
+        else {
+            changePixel(gridX, gridY, forceImg, false);
+        }
+        flaggedTiles.splice(index, 1);
+        tiles.splice(index, 1);
+        clickedTiles.push("".concat(gridX, ",").concat(gridY));
+        if (!immortal && tileFromMap(gridX, gridY) === "bomb_pressed_red")
+            alive = false;
+    }
+    else {
+        console.warn("The function click() crashed: ".concat(gridX, ", ").concat(gridY, " is not a valid tile."));
+    }
+    if (loadZeros) {
+        var x = gridX;
+        var y = gridY;
+        click(x - 1, y - 1);
+        click(x, y - 1);
+        click(x + 1, y - 1);
+        click(x + 1, y);
+        click(x + 1, y + 1);
+        click(x, y + 1);
+        click(x - 1, y + 1);
+        click(x - 1, y);
+    }
+}
+function flag(gridX, gridY) {
+    var valid = tiles.find(function (tile) { return tile.gridX === gridX && tile.gridY === gridY; });
+    if (valid) {
+        var index = tiles.indexOf(valid);
+        tiles[index].image = png_tile_flag;
+        tiles[index].isFlagged = true;
+        tiles[index].hoverImage = png_tile_flag;
+        flaggedTiles.push("".concat(gridX, ",").concat(gridY));
+        currentBombsNumLeft--;
+    }
+    else {
+        console.warn("The function flag() crashed: ".concat(gridX, ", ").concat(gridY, " is not a valid tile."));
+    }
+}
+function unFlag(gridX, gridY) {
+    var valid = tiles.find(function (tile) { return tile.gridX === gridX && tile.gridY === gridY; });
+    if (valid) {
+        var index = tiles.indexOf(valid);
+        tiles[index].image = png_tile_empty;
+        tiles[index].isFlagged = false;
+        tiles[index].hoverImage = png_tile_pressed;
+        flaggedTiles.splice(index, 1);
+        flaggedTiles.push("".concat(gridX, ",").concat(gridY));
+        currentBombsNumLeft++;
+    }
+    else {
+        console.warn("The function unFlag() crashed: ".concat(gridX, ", ").concat(gridY, " is not a valid tile."));
+    }
+}
+function once(code, returnPar) {
+    if (code === undefined || code === null) {
+        code = "";
+    }
+    if (onceArr.indexOf(code.toString()) !== -1) {
+        code;
+        onceArr.push(code.toString());
+        if (returnPar === true) {
+            return true;
+        }
+    }
+    else {
+        if (returnPar === true)
+            return false;
+    }
 }
 //# sourceMappingURL=build.js.map
