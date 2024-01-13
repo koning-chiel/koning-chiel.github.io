@@ -77,7 +77,7 @@ let hoofdstukken = {
 function generate() {
   let hoofdstuk = getRandomObj(hoofdstukken);
   console.log(hoofdstuk);
-  let result = `${hoofdstuk}: ${getRandomArr(hoofdstukken[getRandomObj(hoofdstukken)])} ${getRandomArr(catagories)}`;
+  let result = `${hoofdstuk}: ${getRandomArr(hoofdstukken[hoofdstuk])} ${getRandomArr(catagories)}`;
   console.log(result);
   return result;
 }
