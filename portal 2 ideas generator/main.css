@@ -1,0 +1,20 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #bc935a; /* Choose your background color */
+}
+
+#txt {
+  font-family: "Your Preferred Font", sans-serif; /* Replace with the desired font */
+  color: #5bdb7d; /* Choose your text color */
+  text-align: center;
+  font-size: 2em; /* Adjust the font size as needed */
+  border: 2px solid #2b6939; /* Add a border */
+  padding: 20px;
+  border-radius: 10px; /* Add rounded corners */
+  background-color: #ab2222; /* Choose the background color for the text */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
