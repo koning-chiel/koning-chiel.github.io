@@ -53,7 +53,7 @@ let hoofdstukken = {
   ],
   "Chapter 4 The Surprise": ["Column Blocker", "Laser Chaining", "Triple Laser", "Jailbreak", "Escape"],
   "Chapter 5 The Escape": ["Turret Factory", "Turret Sabotage", "Neurotoxin Sabotage", "Tube Ride", "Core"],
-  "Chapter 6 The Fall": ["Unknown", "Underground", "Cave Johnson", "Repulsion Intro", "Bomb Flings", "Crazy Box", "PotatOS"],
+  "Chapter 6 The Fall": ["Underground", "Cave Johnson", "Repulsion Intro", "Bomb Flings", "Crazy Box", "PotatOS"],
   "Chapter 7 The Reunion": ["Propulsion Intro", "Propulsion Flings", "Conversion Intro", "Three Gels"],
   "Chapter 8 The Itch": [
     "Test",
@@ -76,9 +76,7 @@ let hoofdstukken = {
 
 function generate() {
   let hoofdstuk = getRandomObj(hoofdstukken);
-  console.log(hoofdstuk);
   let result = `${hoofdstuk}: ${getRandomArr(hoofdstukken[hoofdstuk])} ${getRandomArr(catagories)}`;
-  console.log(result);
   return result;
 }
 
