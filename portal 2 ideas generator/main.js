@@ -2,20 +2,27 @@ let txt = "txt";
 let catagories = [
   "in least time",
   "in least portals",
-  "with sar_give_fly",
-  "without jumping",
-  "with viewsnaps",
-  'without using "W" "A" or "D"',
-  "with noclip...",
-  "out of bounds",
   "in least steps",
+  "without jumping",
+  'by only walking with "S"',
+  "without taking any damage",
+  "without your mouse",
+  "out of bounds",
+  "glitchless",
+  "with noclip...",
+  "with sar_give_fly",
+  "with viewsnaps",
   "with sar_give_betsrighter",
   "with sv_gravity 0",
   "with sv_gravity -500",
+  "with cl_fov 20",
   "with host_timescale 2",
   "with portals_resizeall 55 55",
   "with portals_resizeall 27 27",
   "with sv_portal_placement_never_fail 1",
+  "with sv_portal_placement_never_bump 1",
+  "with fps_max 5",
+  "with crosshair 0",
   "with thirdpersonshoulder"
 ];
 let hoofdstukken = {
@@ -76,7 +83,9 @@ let hoofdstukken = {
 
 function generate() {
   let hoofdstuk = getRandomObj(hoofdstukken);
+  console.log(hoofdstuk);
   let result = `${hoofdstuk}: ${getRandomArr(hoofdstukken[hoofdstuk])} ${getRandomArr(catagories)}`;
+  console.log(result);
   return result;
 }
 
