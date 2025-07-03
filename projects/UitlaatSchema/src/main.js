@@ -12,7 +12,7 @@ let gegevens,
   currentKey,
   firebaseConfig = {
     apiKey: apikey(
-      "065073122097083121065102065070076118050119052086051106055103078073053065113113108118081104117056111086055056120120052"
+      "):"
     ),
     authDomain: "uitlaatschemapepper.firebaseapp.com",
     projectId: "uitlaatschemapepper",
